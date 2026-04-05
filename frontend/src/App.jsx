@@ -7,7 +7,7 @@ import {
   scrollSpyIds,
   site,
   skillCategories,
-} from './content.js'
+} from './data/content.js'
 import { useScrollSpy } from './hooks/useScrollSpy.js'
 import { GitHubIcon, LayersIcon, CodeBracketsIcon, AccessibilityIcon, LinkedInIcon, MailIcon } from './components/icons.jsx'
 import { MotionSection } from './components/MotionSection.jsx'

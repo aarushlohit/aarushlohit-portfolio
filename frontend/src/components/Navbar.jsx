@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { navLinks, site } from '../content.js'
+import { navLinks, site } from '../data/content.js'
 import { GitHubIcon } from './icons.jsx'
 import { ThemeToggle } from './ThemeToggle.jsx'
 
