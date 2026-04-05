@@ -37,8 +37,12 @@ jobs:
       - name: Build site
         working-directory: frontend
         env:
-          BASE_PATH: /aarushlohit-portfolio/
+          BASE_PATH: /${{ github.event.repository.name }}/
         run: npm run build
+
+      - name: Add SPA fallback
+        working-directory: frontend
+        run: cp dist/index.html dist/404.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
