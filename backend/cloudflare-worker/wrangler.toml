@@ -1,0 +1,19 @@
+name = "love-vault-worker"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# In production on aarushlohit.tech:
+# routes = [
+#   { pattern = "aarushlohit.tech/api/vault*", zone_name = "aarushlohit.tech" }
+# ]
+
+# Public variables (never put sensitive keys here)
+[vars]
+VAULT_RELEASE_DATE = "2030-01-01T00:00:00+05:30"
+# VAULT_CIPHERTEXT can be placed here if using AES-256-GCM (since it is encrypted):
+# VAULT_CIPHERTEXT = "<base64_ciphertext>"
+
+# Secrets must be configured securely using:
+# wrangler secret put VAULT_KEY
+# or
+# wrangler secret put VAULT_SECRET

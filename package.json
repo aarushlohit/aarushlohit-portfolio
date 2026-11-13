@@ -1,0 +1,12 @@
+{
+  "name": "aarushlohit-portfolio-root",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "test": "node test/vault-security.test.js",
+    "vault:encrypt": "node scripts/vault-tools.js encrypt",
+    "vault:decrypt": "node scripts/vault-tools.js decrypt"
+  }
+}
