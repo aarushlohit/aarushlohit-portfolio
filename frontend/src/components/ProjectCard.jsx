@@ -102,19 +102,27 @@ export function ProjectCard({
             </summary>
             <div className="border-t border-neutral-200/80 px-4 py-1 dark:border-white/10">
               <ul className="divide-y divide-neutral-200/80 dark:divide-white/10">
-                {disclosures.map((item) => (
+                {disclosures.map((item, idx) => (
                   <li
-                    key={item.certIn}
-                    className="flex flex-col gap-1 py-3 sm:flex-row sm:items-center sm:justify-between"
+                    key={`${item.program}-${idx}`}
+                    className="flex flex-col gap-1.5 py-3 sm:flex-row sm:items-start sm:justify-between"
                   >
-                    <span className="text-sm font-medium text-neutral-700 dark:text-neutral-200">
-                      {item.program}
-                    </span>
-                    <span className="font-mono text-xs font-semibold tracking-[0.08em] text-neutral-500 dark:text-neutral-400">
+                    <div className="space-y-0.5">
+                      <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-100">
+                        {item.program}
+                      </span>
+                      {item.impact && (
+                        <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                          {item.impact}
+                        </p>
+                      )}
+                    </div>
+                    <span className="mt-1 sm:mt-0 shrink-0 font-mono text-xs font-semibold tracking-[0.08em] text-neutral-500 dark:text-neutral-400">
                       {item.certIn}
                     </span>
                   </li>
                 ))}
+
               </ul>
             </div>
           </details>

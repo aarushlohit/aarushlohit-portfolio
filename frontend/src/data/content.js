@@ -12,12 +12,14 @@ export const site = {
 
 export const quickFacts = [
   '100+ Bugs Identified (Standalone Research)',
-  'Responsible Disclosure: NPTEL & 2 Major News Portals',
+  '17+ Critical Bugs: Full DB Takeover & 10K+ Employee PII Leak Disclosed',
+  'Full Editorial / CMS Access Takeover Disclosed (News Channel)',
+  'Responsible Disclosure: NPTEL (IIT / MoE)',
   '2,500+ PyPI Downloads',
   '5 Published Books',
   'Amazon App Store Published Developer',
-  'IEEE Computer Society Member',
   'Independent Security Researcher',
+  'IEEE Computer Society Member',
   'GSSoC Contributor - Open Source Track',
 ]
 
@@ -42,19 +44,31 @@ export const projects = [
     title: 'Responsible Vulnerability Disclosure Research',
     subtitle: '100+ findings · Standalone Security Research',
     description:
-      'Conducted independent security assessments of public-facing web applications, educational platforms, and digital news portals. Identified and responsibly disclosed 100+ security vulnerabilities standalone outside traditional bug bounty programs. Reported critical findings across reputable organizations including NPTEL (IIT/IISc), 2 prominent digital news media portals, and educational portals through coordinated disclosure channels.',
-    tech: ['Independent Research', 'Vulnerability Validation', 'Responsible Disclosure'],
+      'Conducted independent, standalone security research on public-facing web applications, educational platforms, and digital news portals outside bug bounty programs. Disclosed 17+ critical vulnerabilities in a major news media network leading to full database takeover and 10,000+ employee PII records exposure (including photos, precise GPS locations, phone numbers, and emails), uncovered full editor/CMS takeover access on a broadcast news channel portal, and performed coordinated disclosures for NPTEL (IIT/MoE) and state education portals.',
+    tech: [
+      'Independent Research',
+      'Database Takeover',
+      'PII Exposure Analysis',
+      'CMS Privilege Escalation',
+      'Responsible Disclosure',
+    ],
     disclosures: [
       {
+        program: 'Major Digital News Media Network',
+        impact:
+          '17+ Critical Vulnerabilities · Full Database Takeover & 10,000+ employee PII records exposed (identity photos, precise GPS coordinates, phone numbers, email addresses)',
+        certIn: 'Responsible Disclosure',
+      },
+      {
+        program: 'Broadcast News Channel Web Portal',
+        impact:
+          'Full Administrative / Editor CMS Access Takeover (arbitrary content publishing & editorial hijack risk)',
+        certIn: 'Responsible Disclosure',
+      },
+      {
         program: 'NPTEL Portal (IIT / MoE)',
-        certIn: 'Responsible Disclosure',
-      },
-      {
-        program: 'National Digital News Portal',
-        certIn: 'Responsible Disclosure',
-      },
-      {
-        program: 'State Digital News Portal',
+        impact:
+          'Security assessment and coordinated vulnerability disclosure on official academic course infrastructure',
         certIn: 'Responsible Disclosure',
       },
       {
@@ -72,6 +86,7 @@ export const projects = [
     ],
     links: [],
   },
+
 
   {
     title: 'Python CLI Automation Tool',
@@ -167,9 +182,10 @@ export const achievements = [
   {
     title: '100+ Vulnerabilities Identified (Standalone Research)',
     detail:
-      'Identified and responsibly disclosed 100+ security vulnerabilities standalone across educational platforms including NPTEL (IIT/IISc) and 2 major digital news media portals.',
+      'Identified and responsibly disclosed 100+ vulnerabilities standalone: uncovered 17+ critical bugs including full database takeover exposing 10k+ employee PII records with GPS coordinates & photos on a major news network, full editorial CMS takeover access on a broadcast news channel, and disclosures for NPTEL (IIT / MoE).',
     period: 'Security Research',
   },
+
   {
     title: 'GSSoC Contributor - Open Source Track',
     detail:
