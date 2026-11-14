@@ -1,115 +1,152 @@
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 
 export function HeartPadlock({ isUnlocked = false }) {
-  return (
-    <div className="relative flex items-center justify-center p-4">
-      {/* Outer ambient glow */}
-      <motion.div
-        className="absolute -inset-4 rounded-full bg-gradient-to-r from-rose-500/20 via-pink-500/25 to-rose-400/20 blur-2xl"
-        animate={{
-          scale: isUnlocked ? [1, 1.25, 1.15] : [0.95, 1.08, 0.95],
-          opacity: isUnlocked ? [0.6, 0.9, 0.75] : [0.35, 0.55, 0.35],
-        }}
-        transition={{
-          duration: isUnlocked ? 2 : 3.5,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
+  // Tactile micro-tilt on mouse move
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
 
+  const springConfig = { damping: 20, stiffness: 180 }
+  const rotateX = useSpring(useTransform(mouseY, [-60, 60], [8, -8]), springConfig)
+  const rotateY = useSpring(useTransform(mouseX, [-60, 60], [-8, 8]), springConfig)
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = e.clientX - rect.left - rect.width / 2
+    const y = e.clientY - rect.top - rect.height / 2
+    mouseX.set(x)
+    mouseY.set(y)
+  }
+
+  const handleMouseLeave = () => {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
+
+  return (
+    <div
+      className="relative flex flex-col items-center justify-center py-2"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: 900 }}
+    >
       <motion.div
-        className="relative z-10 flex flex-col items-center"
-        initial={false}
-        animate={isUnlocked ? { scale: [1, 1.12, 1.05] } : { y: [0, -4, 0] }}
+        style={{ rotateX, rotateY }}
+        className="relative z-10 flex flex-col items-center cursor-default select-none"
+        animate={isUnlocked ? { scale: [1, 1.06, 1.03] } : { y: [0, -3, 0] }}
         transition={
           isUnlocked
-            ? { duration: 1.2, ease: 'easeOut' }
-            : { duration: 4, repeat: Infinity, ease: 'easeInOut' }
+            ? { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+            : { duration: 4.5, repeat: Infinity, ease: 'easeInOut' }
         }
       >
+        {/* Soft shadow cast below the lock */}
+        <div className="absolute -bottom-4 w-28 h-6 bg-black/60 rounded-full blur-md" />
+
         <svg
-          viewBox="0 0 160 170"
-          className="h-32 w-32 sm:h-40 sm:w-40 drop-shadow-[0_0_25px_rgba(244,63,94,0.45)]"
+          viewBox="0 0 140 150"
+          className="h-32 w-32 sm:h-36 sm:w-36 overflow-visible"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <linearGradient id="shackleGrad" x1="45" y1="20" x2="115" y2="80" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#f472b6" />
-              <stop offset="0.5" stopColor="#e11d48" />
-              <stop offset="1" stopColor="#9f1239" />
+            {/* Shackle metallic gradient */}
+            <linearGradient id="shackleMetal" x1="30" y1="10" x2="110" y2="70" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#f5d0dc" />
+              <stop offset="25%" stopColor="#c48b9f" />
+              <stop offset="50%" stopColor="#4a2e38" />
+              <stop offset="75%" stopColor="#8c586a" />
+              <stop offset="100%" stopColor="#f0c2cf" />
             </linearGradient>
 
-            <linearGradient id="heartGrad" x1="20" y1="45" x2="140" y2="160" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#1f1118" />
-              <stop offset="0.4" stopColor="#2e1220" />
-              <stop offset="0.8" stopColor="#1c0b14" />
-              <stop offset="1" stopColor="#0f050b" />
+            {/* Lock body: deep dark obsidian with subtle brushed texture */}
+            <radialGradient id="bodyBase" cx="50%" cy="40%" r="70%">
+              <stop offset="0%" stopColor="#22171c" />
+              <stop offset="65%" stopColor="#120c10" />
+              <stop offset="100%" stopColor="#080507" />
+            </radialGradient>
+
+            {/* Chamfer rim metallic stroke */}
+            <linearGradient id="chamferRim" x1="15" y1="35" x2="125" y2="140" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#f3cbd7" stopOpacity="0.8" />
+              <stop offset="35%" stopColor="#9e6678" stopOpacity="0.4" />
+              <stop offset="70%" stopColor="#472632" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#e8b4c3" stopOpacity="0.7" />
             </linearGradient>
 
-            <linearGradient id="strokeGrad" x1="20" y1="50" x2="140" y2="160" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#fb7185" />
-              <stop offset="0.5" stopColor="#f43f5e" />
-              <stop offset="1" stopColor="#be123c" />
+            {/* Subtle inner plate bevel */}
+            <linearGradient id="innerBevel" x1="70" y1="50" x2="70" y2="135" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="#000000" stopOpacity="0.5" />
             </linearGradient>
 
-            <radialGradient id="keyholeGlow" cx="80" cy="105" r="16" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#fda4af" stopOpacity="0.8" />
-              <stop offset="1" stopColor="#f43f5e" stopOpacity="0" />
+            {/* Keyhole warm amber-rose illumination */}
+            <radialGradient id="keyholeCore" cx="70" cy="88" r="14" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#ffb3c6" stopOpacity="0.9" />
+              <stop offset="45%" stopColor="#e11d48" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#881337" stopOpacity="0" />
             </radialGradient>
           </defs>
 
-          {/* Padlock Shackle */}
+          {/* Shackle: Industrial hardened arch with realistic hinge */}
           <motion.path
-            d="M 52 75 V 44 C 52 28.5 64.5 16 80 16 C 95.5 16 108 28.5 108 44 V 75"
-            stroke="url(#shackleGrad)"
-            strokeWidth="11"
+            d="M 44 65 V 36 C 44 21.6 55.6 10 70 10 C 84.4 10 96 21.6 96 36 V 65"
+            stroke="url(#shackleMetal)"
+            strokeWidth="9"
             strokeLinecap="round"
             fill="none"
             animate={
               isUnlocked
-                ? { y: -16, rotate: -18, originX: '52px', originY: '44px' }
+                ? { y: -14, rotate: -22, originX: '44px', originY: '36px' }
                 : { y: 0, rotate: 0 }
             }
-            transition={{ duration: 0.9, ease: [0.34, 1.56, 0.64, 1] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           />
 
-          {/* Heart Padlock Body */}
+          {/* Lock Body: Handcrafted Sculpted Heart */}
           <path
-            d="M 80 155 C 80 155 24 118 24 76 C 24 56 39 42 58 42 C 68.5 42 76 47 80 54 C 84 47 91.5 42 102 42 C 121 42 136 56 136 76 C 136 118 80 155 80 155 Z"
-            fill="url(#heartGrad)"
-            stroke="url(#strokeGrad)"
-            strokeWidth="3.5"
-            strokeLinejoin="round"
+            d="M 70 138 C 70 138 20 104 20 64 C 20 46 34 34 50 34 C 60 34 66 38 70 44 C 74 38 80 34 90 34 C 106 34 120 46 120 64 C 120 104 70 138 70 138 Z"
+            fill="url(#bodyBase)"
+            stroke="url(#chamferRim)"
+            strokeWidth="1.75"
           />
 
-          {/* Subtle Inner Heart Highlights */}
+          {/* Inner inset border for luxury watch / jewelry look */}
           <path
-            d="M 80 144 C 80 144 32 110 32 77 C 32 61 44 50 58 50 C 67 50 74 54 80 61 C 86 54 93 50 102 50 C 116 50 128 61 128 77 C 128 110 80 144 80 144 Z"
-            fill="none"
-            stroke="#fb7185"
-            strokeWidth="1.2"
-            strokeOpacity="0.35"
+            d="M 70 130 C 70 130 27 98 27 64 C 27 50 38 41 50 41 C 58.5 41 64 45 70 51 C 76 45 81.5 41 90 41 C 102 41 113 50 113 64 C 113 98 70 130 70 130 Z"
+            fill="url(#innerBevel)"
+            stroke="rgba(255, 255, 255, 0.06)"
+            strokeWidth="1"
           />
 
-          {/* Keyhole Glow & Silhouette */}
-          <circle cx="80" cy="100" r="14" fill="url(#keyholeGlow)" />
-          <circle cx="80" cy="98" r="5" fill="#fbcfe8" />
+          {/* Architectural Rivets (Precision hardware screws) */}
+          <circle cx="44" cy="54" r="1.6" fill="#c48b9f" opacity="0.6" />
+          <circle cx="96" cy="54" r="1.6" fill="#c48b9f" opacity="0.6" />
+          <circle cx="70" cy="120" r="1.6" fill="#c48b9f" opacity="0.5" />
+
+          {/* Keyhole Escutcheon */}
+          <circle cx="70" cy="85" r="15" fill="none" stroke="rgba(244, 114, 182, 0.2)" strokeWidth="0.8" />
+          <circle cx="70" cy="85" r="12" fill="url(#keyholeCore)" />
+
+          {/* Precision Keyhole Slot */}
+          <circle cx="70" cy="83" r="4" fill="#080507" />
           <path
-            d="M 77 100 L 76 114 C 76 115.5 77.5 116.5 80 116.5 C 82.5 116.5 84 115.5 84 114 L 83 100 Z"
-            fill="#fbcfe8"
+            d="M 68 84 L 67.2 94.5 C 67.2 95.3 67.9 96 68.8 96 H 71.2 C 72.1 96 72.8 95.3 72.8 94.5 L 72 84 Z"
+            fill="#080507"
           />
+
+          {/* Hairline keyhole rim highlight */}
+          <circle cx="70" cy="83" r="4.2" fill="none" stroke="#fbcfe8" strokeWidth="0.5" opacity="0.7" />
         </svg>
 
-        {/* Lock Status Text Tag */}
-        <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-rose-500/30 bg-rose-950/40 px-3 py-1 backdrop-blur-md">
+        {/* Minimalist Museum-Style Metadata Tag */}
+        <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.03] backdrop-blur-sm">
           <span
-            className={`h-2 w-2 rounded-full ${
-              isUnlocked ? 'bg-emerald-400 shadow-[0_0_8px_#34d399]' : 'bg-rose-500 shadow-[0_0_8px_#f43f5e] animate-pulse'
+            className={`h-1.5 w-1.5 rounded-full ${
+              isUnlocked ? 'bg-emerald-400' : 'bg-rose-500'
             }`}
           />
-          <span className="font-mono text-[11px] font-semibold uppercase tracking-widest text-rose-200">
-            {isUnlocked ? 'SEAL BROKEN • UNLOCKED' : 'TIME CAPSULE • LOCKED'}
+          <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-neutral-400">
+            {isUnlocked ? 'VAULT STATUS: UNSEALED' : 'VAULT STATUS: SEALED // 2030'}
           </span>
         </div>
       </motion.div>

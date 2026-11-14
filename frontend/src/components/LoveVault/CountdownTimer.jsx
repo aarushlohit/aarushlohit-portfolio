@@ -17,7 +17,6 @@ function calculateTimeRemaining(targetMs) {
     }
   }
 
-  // Calculate units accurately
   const totalSeconds = Math.floor(diff / 1000)
   const seconds = totalSeconds % 60
   const totalMinutes = Math.floor(totalSeconds / 60)
@@ -26,7 +25,6 @@ function calculateTimeRemaining(targetMs) {
   const hours = totalHours % 24
   const totalDays = Math.floor(totalHours / 24)
 
-  // Standard Gregorian average year calculation for display
   const years = Math.floor(totalDays / 365.25)
   const days = Math.floor(totalDays % 365.25)
 
@@ -56,29 +54,36 @@ export function CountdownTimer({ onCountdownZero }) {
   }, [onCountdownZero])
 
   const units = [
-    { label: 'Years', value: String(timeLeft.years).padStart(2, '0') },
-    { label: 'Days', value: String(timeLeft.days).padStart(3, '0') },
-    { label: 'Hours', value: String(timeLeft.hours).padStart(2, '0') },
-    { label: 'Minutes', value: String(timeLeft.minutes).padStart(2, '0') },
-    { label: 'Seconds', value: String(timeLeft.seconds).padStart(2, '0') },
+    { label: 'YRS', value: String(timeLeft.years).padStart(2, '0') },
+    { label: 'DAYS', value: String(timeLeft.days).padStart(3, '0') },
+    { label: 'HRS', value: String(timeLeft.hours).padStart(2, '0') },
+    { label: 'MIN', value: String(timeLeft.minutes).padStart(2, '0') },
+    { label: 'SEC', value: String(timeLeft.seconds).padStart(2, '0') },
   ]
 
   return (
-    <div className="w-full max-w-2xl px-2">
-      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2.5 sm:gap-4">
-        {units.map((unit) => (
-          <div
-            key={unit.label}
-            className="group relative flex flex-col items-center justify-center rounded-2xl border border-rose-500/20 bg-gradient-to-b from-white/[0.04] to-transparent p-3 sm:p-4 backdrop-blur-md transition-all hover:border-rose-400/40 hover:shadow-[0_0_20px_rgba(244,63,94,0.15)]"
-          >
-            <div className="font-mono text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-wider text-rose-100 tabular-nums drop-shadow-[0_0_12px_rgba(251,113,133,0.3)]">
-              {unit.value}
+    <div className="w-full max-w-xl mx-auto">
+      {/* Precision Chronometer Strip */}
+      <div className="relative rounded-2xl border border-white/[0.08] bg-black/40 backdrop-blur-md px-3 sm:px-6 py-4 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.8)]">
+        <div className="flex items-center justify-between divide-x divide-white/[0.06]">
+          {units.map((unit) => (
+            <div
+              key={unit.label}
+              className="flex-1 flex flex-col items-center justify-center px-1 sm:px-2"
+            >
+              <span className="font-mono text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-neutral-100 tabular-nums">
+                {unit.value}
+              </span>
+              <span className="mt-1.5 font-mono text-[9px] sm:text-[10px] tracking-[0.24em] text-neutral-500 uppercase">
+                {unit.label}
+              </span>
             </div>
-            <div className="mt-1 font-mono text-[10px] sm:text-xs uppercase tracking-widest text-rose-300/70">
-              {unit.label}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+      <div className="mt-2.5 flex items-center justify-between px-2 text-[10px] font-mono tracking-widest text-neutral-600 uppercase">
+        <span>T-MINUS</span>
+        <span>COUNTDOWN TO 2030-01-01 IST</span>
       </div>
     </div>
   )
