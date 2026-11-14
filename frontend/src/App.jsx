@@ -178,15 +178,16 @@ function Hero() {
                   {site.name}
                 </p>
                 <p className="mt-1 text-sm font-medium text-sky-700 dark:text-sky-300">
-                  Bugcrowd Security Researcher
+                  Independent Security Researcher
                 </p>
               </div>
               <span className="rounded-full border border-sky-300/50 bg-sky-500/10 px-3 py-1 text-xs font-semibold text-sky-800 dark:border-sky-500/30 dark:text-sky-200">
-                24+ findings
+                100+ findings
               </span>
             </div>
             <div className="relative mt-5 grid grid-cols-2 gap-2">
-              {['Bugcrowd', 'GSSoC', 'PyPI', 'Amazon AppStore'].map((item) => (
+              {['Responsible Disclosure', 'GSSoC', 'PyPI', 'Amazon AppStore'].map((item) => (
+
                 <span
                   key={item}
                   className="rounded-xl border border-neutral-200/80 bg-white/65 px-3 py-2 text-center text-xs font-semibold text-neutral-700 dark:border-white/10 dark:bg-white/[0.055] dark:text-neutral-200"

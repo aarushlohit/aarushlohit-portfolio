@@ -1,9 +1,9 @@
 export const site = {
   name: 'A. Lohit',
   title:
-    'Cybersecurity Researcher | Bugcrowd Security Researcher | Software Developer | Mobile App Developer',
+    'Cybersecurity Researcher | Independent Security Researcher | Software Developer | Mobile App Developer',
   tagline:
-    'Computer Science (Cybersecurity) student focused on web application security, responsible vulnerability disclosure, secure software development, and practical security-focused tooling.',
+    'Computer Science (Cybersecurity) student focused on web application security, independent vulnerability research (100+ bugs identified across NPTEL, news portals, and institutions), secure software development, and practical security tooling.',
   githubProfile: 'https://github.com/AarushLohit',
   linkedin: 'https://in.linkedin.com/in/aarush-lohit-273877380',
   email: 'mailto:aarushlohit.developer@gmail.com',
@@ -11,12 +11,13 @@ export const site = {
 }
 
 export const quickFacts = [
-  '24+ Security Findings Reported',
+  '100+ Bugs Identified (Standalone Research)',
+  'Responsible Disclosure: NPTEL & 2 Major News Portals',
   '2,500+ PyPI Downloads',
   '5 Published Books',
   'Amazon App Store Published Developer',
   'IEEE Computer Society Member',
-  'Bugcrowd Security Researcher',
+  'Independent Security Researcher',
   'GSSoC Contributor - Open Source Track',
 ]
 
@@ -39,11 +40,23 @@ export const projects = [
   },
   {
     title: 'Responsible Vulnerability Disclosure Research',
-    subtitle: '24+ findings · Coordinated disclosure',
+    subtitle: '100+ findings · Standalone Security Research',
     description:
-      'Conducted security assessments of public-facing web applications and portals. Identified and responsibly disclosed 24+ security findings through coordinated disclosure channels. Performed reconnaissance, vulnerability validation, impact assessment, proof-of-concept documentation, and remediation reporting.',
-    tech: ['Reconnaissance', 'Vulnerability Validation', 'Reporting'],
+      'Conducted independent security assessments of public-facing web applications, educational platforms, and digital news portals. Identified and responsibly disclosed 100+ security vulnerabilities standalone outside traditional bug bounty programs. Reported critical findings across reputable organizations including NPTEL (IIT/IISc), 2 prominent digital news media portals, and educational portals through coordinated disclosure channels.',
+    tech: ['Independent Research', 'Vulnerability Validation', 'Responsible Disclosure'],
     disclosures: [
+      {
+        program: 'NPTEL Portal (IIT / MoE)',
+        certIn: 'Responsible Disclosure',
+      },
+      {
+        program: 'National Digital News Portal',
+        certIn: 'Responsible Disclosure',
+      },
+      {
+        program: 'State Digital News Portal',
+        certIn: 'Responsible Disclosure',
+      },
       {
         program: 'Tamilnadu SSLC Vulnerability',
         certIn: 'CERTIn-63432926',
@@ -59,6 +72,7 @@ export const projects = [
     ],
     links: [],
   },
+
   {
     title: 'Python CLI Automation Tool',
     subtitle: 'PyPI · 2,500+ downloads',
@@ -151,11 +165,18 @@ export const skillCategories = [
 
 export const achievements = [
   {
+    title: '100+ Vulnerabilities Identified (Standalone Research)',
+    detail:
+      'Identified and responsibly disclosed 100+ security vulnerabilities standalone across educational platforms including NPTEL (IIT/IISc) and 2 major digital news media portals.',
+    period: 'Security Research',
+  },
+  {
     title: 'GSSoC Contributor - Open Source Track',
     detail:
       'Contributing to open-source projects through GirlScript Summer of Code with a focus on practical engineering, collaboration, and maintainable improvements.',
     period: 'GirlScript Summer of Code',
   },
+
   {
     title: 'Zairok (Amazon App Store)',
     detail: 'Published mobile app developer with Zairok live on Amazon Appstore.',
